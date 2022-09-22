@@ -4,9 +4,9 @@ from zookeeper import Ztree
 from zookeeper import Znode 
 
 
-
+#Creacion de arbol
 arbol = Ztree()
-
+#Menu de opciones para creacion, eliminacion y modificacion de nodos
 while(True):
     print("\t\t-------Bienvenido a Zookeeper--------")
     print("*** Selecciona una opción *****")
@@ -21,9 +21,10 @@ while(True):
     print("0. Salir")
 
     opcion = input("$")
-
+    #Salir del menu
     if(opcion == "0"):
         break
+    #Crear nodo
     if(opcion == "1"):
         path = input("Path = ")
         data = input("Contenido de Znode = ")
@@ -41,28 +42,35 @@ while(True):
             onservice = False
 
         arbol.create(path,data,efimero,onservice,int(deadtime),padre)
+    #Eliminar nodo
     if(opcion == "2"):
         path = input("Path = ")
         version = input("Version actual =")
         arbol.delete(path,int(version))
+    #Imprimir arbol
     if(opcion == "3"):
         arbol.showTree()
+    #Ver informacion completa de nodo
     if(opcion =="4"):
         path = input("Path = ")
         arbol.showNode(path)
+    #Cambiar dato de nodo
     if(opcion == "5"):
         path = input("Path = ")
         contenido = input("Contenino =")
         arbol.setData(path,contenido)
+    #Imprimir nodos hijo de nodo
     if (opcion=="6"):
         path = input("Path = ")
         print(arbol.getChildren(path))
+    #Saber existencia de nodo en arbol
     if (opcion=="7"):
         path = input("Path = ")
         if(arbol.exist(path)):
             print("Nodo encontrado")
         else:
             print("Nodo NO encontrado")
+    #Impresion de dato del nodo
     if(opcion == "8"):
         path = input("Path = ")
         print(arbol.getData(path))
